@@ -20,6 +20,11 @@ Prevent enemies from reaching the green goal on the right side of the grid. You 
 - **Left click** it to destroy it and earn **+10 score**
 - If you miss and the enemy reaches the green goal, you lose **1 life**
 
+### How to Win
+- Earn **200 points** by clicking and destroying enemies
+- You must still have at least 1 life remaining when you hit 200
+- The game freezes and displays **YOU WIN!** on screen
+
 ### How to Lose
 - Let 3 enemies reach the goal without clicking them
 - Lives count down: 3 → 2 → 1 → 0

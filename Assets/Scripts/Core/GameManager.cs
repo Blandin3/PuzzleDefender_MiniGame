@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 
     public int score = 0;
     public int lives = 3;
+    public bool gameWon = false;
 
     void Awake()
     {
@@ -24,6 +25,27 @@ public class GameManager : MonoBehaviour
     {
         score += value;
         Debug.Log("Score: " + score);
+        CheckWinCondition(0);
+    }
+
+    public void EnemyDefeated()
+    {
+        if (lives <= 0) return;
+        score += 10;
+        Debug.Log("Score: " + score);
+    }
+
+    public void CheckWinCondition(int enemiesRemaining)
+    {
+        if (lives > 0 && score >= 200)
+            WinGame();
+    }
+
+    void WinGame()
+    {
+        gameWon = true;
+        Debug.Log("YOU WIN!");
+        Time.timeScale = 0f;
     }
 
     public void LoseLife()

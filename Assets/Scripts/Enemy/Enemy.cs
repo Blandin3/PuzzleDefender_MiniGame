@@ -53,6 +53,7 @@ public class Enemy : Character
         if (distance < 0.2f)
         {
             GameManager.Instance.LoseLife();
+            NotifyRemoved();
             Destroy(gameObject);
         }
     }
@@ -75,6 +76,13 @@ public class Enemy : Character
     public void Die()
     {
         GameManager.Instance.AddScore(10);
+        NotifyRemoved();
         Destroy(gameObject);
+    }
+
+    void NotifyRemoved()
+    {
+        EnemyFactory factory = FindObjectOfType<EnemyFactory>();
+        if (factory != null) factory.EnemyRemoved();
     }
 }

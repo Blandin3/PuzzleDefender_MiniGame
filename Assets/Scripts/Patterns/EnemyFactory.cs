@@ -31,13 +31,29 @@ public class EnemyFactory : MonoBehaviour
     }
 
     private int spawnCount = 0;
+    private int totalWaves = 10;
+    private int enemiesAlive = 0;
 
     void SpawnNext()
     {
         if (GameManager.Instance.lives <= 0) return;
+
+        if (spawnCount >= totalWaves)
+        {
+            CancelInvoke(nameof(SpawnNext));
+            return;
+        }
+
         string type = (spawnCount % 3 == 0) ? "tank" : "fast";
         SpawnEnemy(type);
         spawnCount++;
+    }
+
+    public void EnemyRemoved()
+    {
+        enemiesAlive--;
+        if (spawnCount >= totalWaves)
+            GameManager.Instance.CheckWinCondition(enemiesAlive);
     }
 
     public void SpawnEnemy(string type)
@@ -50,6 +66,9 @@ public class EnemyFactory : MonoBehaviour
             enemy = Instantiate(tankEnemyPrefab, spawnPoint.position, Quaternion.identity);
 
         if (enemy != null)
+        {
             enemy.GetComponent<Enemy>().target = goal;
+            enemiesAlive++;
+        }
     }
 }
